@@ -2,9 +2,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div>
-      <h1>Welcome to the home Page</h1>
-    </div>
+    <div>this is category archive page</div>
   )
 }
 
