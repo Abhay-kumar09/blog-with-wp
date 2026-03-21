@@ -5,11 +5,11 @@ import Link from 'next/link'
 const Featuredimage = ({ post }) => {
     let img = ''
 
-    const defaultFeaturedImage = "https://wp.abhinavr.com/wp-content/uploads/2022/12/travel_icy-polar_022K.jpg";
-    const defaultWidth = "300";
-    const defaultHeight = "200";
+    const defaultFeaturedImage = "https://dev-blog-with-wp.pantheonsite.io/wp-content/uploads/2022/12/hiking-backpack.jpg";
+    const defaultWidth = "900";
+    const defaultHeight = "600";
 
-    if(post.featuredImage){
+    if (post.featuredImage) {
         let size = post.featuredImage.node.mediaDetails.sizes[0]
         img = {
             src: size.sourceUrl,
@@ -17,18 +17,18 @@ const Featuredimage = ({ post }) => {
             height: size.height
         }
     }
-    else{
+    else {
         img = {
             src: defaultFeaturedImage,
             width: defaultWidth,
             height: defaultHeight
         }
     }
-  return (
+    return (
         <Link href={`/blog/${post.slug}`}>
-            <Image src={img.src} width={img.width} height={img.height} alt={post.title} className="h-full object-cover rounded-xl"/>
+            <Image src={img.src} width={img.width} height={img.height} alt={post.title} className="h-full object-cover rounded-xl" />
         </Link>
-  )
+    )
 }
 
 export default Featuredimage
