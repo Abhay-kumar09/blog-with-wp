@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const SiteHeader = ({ className}) => {
     return (
-        <header className='fixed top-0 left-0 w-full '>
+        <header className='fixed top-0 left-0 w-full z-20 '>
             <div className='container'>
                 <div className='wrapper flex flex-wrap justify-between items-center'>
                     <div className='logo-area max-w-45 w-full h-30'>

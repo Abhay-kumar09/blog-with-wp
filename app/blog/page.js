@@ -1,10 +1,56 @@
 import React from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import { getAllPosts } from '../../lib/posts'
+import BannerSecond from '../components/BannerSecond'
+import Featuredimage from '../components/Featuredimage'
 
-const page = () => {
+export const metadata = {
+  title: 'Blog - Cool Nomad',
+}
+
+const page = async () => {
+  const allPosts = await getAllPosts()
+
   return (
-    <div>
-        <h1>Welcome to the Blog Page</h1>
-    </div>
+    <>
+      <BannerSecond />
+      <main>
+        <section className='post-list mt-4'>
+          <div className='container'>
+          <ul>
+            {
+              allPosts?.nodes?.map((post) => (
+                <li key={post.slug} className='grid grid-cols-5 gap-4 mb-4'>
+                  <div className='col-span-2 '>
+                    <Featuredimage post={post}/>
+                  </div>
+                  <div className='col-span-3'>
+                    <h2 className='py-4'>
+                      <Link href={`/blog/${post.slug}`} className='text-blue-400 text-2xl hover:text-blue-600'>
+                        {post.title}
+                      </Link>
+                    </h2>
+                    <div className='text-lg' dangerouslySetInnerHTML={{ __html: post.excerpt }} />
+                      <div className='py-4'>
+                     Posted under {
+                       post.categories?.nodes?.map((cat) => (
+                        <Link className='text-blue-400 hover:text-blue-500' key={cat.slug} href={`/category/${cat.slug}`}>
+                          {cat.name}
+                        </Link>
+                       ))
+                     }
+                      </div>
+                  </div>
+    
+                </li>
+              ))
+            }
+          </ul>
+          </div>
+        </section>
+      </main>
+    </>
   )
 }
 
