@@ -15,7 +15,7 @@ const page = async () => {
 
   return (
     <>
-      <BannerSecond />
+      <BannerSecond title={"Blog"} description="Read our latest articles" />
       <main>
         <section className='post-list mt-4'>
           <div className='container'>
