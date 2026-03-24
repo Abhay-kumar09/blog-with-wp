@@ -12,3 +12,31 @@ body {
   margin: 0 auto;
   padding: 0 20px;
 }
+
+.content-area p{
+  @apply pb-4 text-lg;
+}
+
+.content-area a{
+  @apply underline text-blue-400 hover:text-blue-600;
+}
+
+.content-area ul{
+  @apply pb-4 list-disc list-inside text-yellow-600 text-lg;
+}
+
+.content-area figure{
+  @apply pb-4
+}
+
+.content-area figure figcaption{
+  @apply text-center py-2;
+}
+
+.content-area h2{
+  @apply text-2xl font-bold py-4
+}
+
+.content-area h3{
+  @apply text-xl font-bold py-4
+}
