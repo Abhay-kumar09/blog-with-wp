@@ -28,7 +28,7 @@ const page = async ({ params }) => {
     }
     return (
         <>
-            <BannerSecond title={pageData.title} description="Read our latest articles" />
+            <BannerSecond title={pageData.title} description="" />
             <section className="content-area mb-24">
                 <div className="container">
                     <div
