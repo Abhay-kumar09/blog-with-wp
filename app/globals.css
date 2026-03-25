@@ -41,3 +41,57 @@ body {
 .content-area h3 {
   @apply text-xl font-bold py-4
 }
+
+.contact-form {
+  @apply block w-full mb-4
+}
+
+.contact-form input,
+.contact-form textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.25rem;
+  outline: none;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #fcd34d;
+  box-shadow:
+    0 0 0 2px rgba(252, 211, 77, 0.5),
+    0 0 0 4px #fff;
+}
+
+.contact-form button {
+  display: inline-block;
+  background-color: #22c55e;
+  color: #f1f5f9;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.65rem;
+  border-radius: 0.25rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-form button:hover {
+  background-color: #16a34a;
+}
+
+.contact-form button:active {
+  background-color: #15803d;
+}
+
+button:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgba(252, 211, 77, 0.5),
+    0 0 0 4px #ffffff;
+}
