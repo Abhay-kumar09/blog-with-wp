@@ -2,14 +2,29 @@ import React from 'react'
 import { getSinglePost, getPostSlugs } from '../../../lib/posts'
 import BlogFeatureImage from '@/app/components/BlogFeatureImage';
 import Date from '@/app/components/Date';
+import { getSeo } from '@/lib/seo';
 
 // Dynamic Metadata setting for the Next.js App Router
 export async function generateMetadata({ params }) {
     const { slug } = await params;
     const pageData = await getSinglePost(slug);
+    const seoData = await getSeo('post', slug)
 
     return {
-        title: pageData?.title ? `${pageData.title} - Cool Nomad` : 'Blog Post',
+        title: seoData?.title ? `${seoData.title} - Cool Nomad` : 'Blog Post',
+        description: seoData?.metaDesc,
+        openGraph: {
+            title: seoData?.opengraphTitle,
+            description: seoData?.opengraphDescription,
+            url: seoData?.opengraphUrl,
+            siteName: seoData?.opengraphSiteName,
+            images: [
+                {
+                    url: seoData?.opengraphImage?.mediaItemUrl,
+                },
+            ],
+            type: seoData?.opengraphType,
+        },
     }
 }
 
@@ -40,8 +55,8 @@ const page = async ({ params }) => {
                 <div className="container">
                     <h1 className="text-4xl md:text-5xl font-bold z-2 relative text-center text-white mb-4 mt-6">{pageData.title}</h1>
                     <div className='pb-4 text-slate-100  text-center z-10'>
-                       Posted by nextjs_user, last update on
-                       <Date dateString={pageData.modified}/>
+                        Posted by nextjs_user, last update on
+                        <Date dateString={pageData.modified} />
                     </div>
                 </div>
             </section>
