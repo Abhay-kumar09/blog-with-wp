@@ -1,17 +1,17 @@
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-import { getAllPosts } from '../../lib/posts'
+import { getPostList } from '../../lib/posts'
 import BannerSecond from '../components/BannerSecond'
 import Featuredimage from '../components/Featuredimage'
 import Date from '../components/Date'
+import LoadMore from '../components/LoadMore'
 
 export const metadata = {
   title: 'Blog - Cool Nomad',
 }
 
 const page = async () => {
-  const allPosts = await getAllPosts()
+  const allPosts = await getPostList()
 
   return (
     <>
@@ -51,6 +51,7 @@ const page = async () => {
                 ))
               }
             </ul>
+            <LoadMore initialPageInfo={allPosts?.pageInfo} />
           </div>
         </section>
       </main>
