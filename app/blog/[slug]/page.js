@@ -10,22 +10,27 @@ export async function generateMetadata({ params }) {
     const pageData = await getSinglePost(slug);
     const seoData = await getSeo('post', slug)
 
-    return {
-        title: seoData?.title ? `${seoData.title} - Cool Nomad` : 'Blog Post',
-        description: seoData?.metaDesc,
-        openGraph: {
-            title: seoData?.opengraphTitle,
-            description: seoData?.opengraphDescription,
-            url: seoData?.opengraphUrl,
-            siteName: seoData?.opengraphSiteName,
+    const metadata = {
+        title: seoData?.title ? `${seoData.title} - Cool Nomad` : (pageData?.title || 'Blog Post'),
+        description: seoData?.metaDesc || '',
+    }
+
+    if (seoData) {
+        metadata.openGraph = {
+            title: seoData.opengraphTitle,
+            description: seoData.opengraphDescription,
+            url: seoData.opengraphUrl,
+            siteName: seoData.opengraphSiteName,
             images: [
                 {
-                    url: seoData?.opengraphImage?.mediaItemUrl,
+                    url: seoData.opengraphImage?.mediaItemUrl,
                 },
             ],
-            type: seoData?.opengraphType,
-        },
+            type: seoData.opengraphType || 'article',
+        }
     }
+
+    return metadata;
 }
 
 // Generate static routes at build time (optional but recommended for App Router static pages)
