@@ -3,6 +3,7 @@ import { getSinglePost, getPostSlugs } from '../../../lib/posts'
 import BlogFeatureImage from '@/app/components/BlogFeatureImage';
 import Date from '@/app/components/Date';
 import { getSeo } from '@/lib/seo';
+import { getContact } from '../../../lib/acf'
 
 // Dynamic Metadata setting for the Next.js App Router
 export async function generateMetadata({ params }) {
@@ -35,11 +36,17 @@ export async function generateStaticParams() {
     return pageSlugs.map((s) => ({
         slug: s.slug
     }));
+
 }
 
 const page = async ({ params }) => {
     const { slug } = await params;
     const pageData = await getSinglePost(slug);
+    const details = await getContact(slug)
+
+    console.log(details);
+
+
 
     if (!pageData) {
         return <div>Post not found</div>;
@@ -58,6 +65,17 @@ const page = async ({ params }) => {
                         Posted by nextjs_user, last update on
                         <Date dateString={pageData.modified} />
                     </div>
+                    {details?.contactType && (
+                        <div className='text-center'>
+                            <p className='text-white mb-2'>
+                                email: <span className='text-yellow-400'>{details.contactType.email}</span>
+                            </p>
+
+                            <p className='text-white'>
+                                contact: <span className='text-green-400'>{details.contactType.contact}</span>
+                            </p>
+                        </div>
+                    )}
                 </div>
             </section>
             <section className="content-area mb-24">
