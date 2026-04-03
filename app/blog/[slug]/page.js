@@ -4,6 +4,7 @@ import BlogFeatureImage from '@/app/components/BlogFeatureImage';
 import Date from '@/app/components/Date';
 import { getSeo } from '@/lib/seo';
 import { getContact } from '../../../lib/acf'
+import Link from 'next/link';
 
 // Dynamic Metadata setting for the Next.js App Router
 export async function generateMetadata({ params }) {
@@ -84,6 +85,12 @@ const page = async ({ params }) => {
                         className="prose max-w-none text-lg mt-8"
                         dangerouslySetInnerHTML={{ __html: pageData.content }}
                     />
+                    {details?.contactType?.embed && (
+                        <div
+                            className="mt-6 mx"
+                            dangerouslySetInnerHTML={{ __html: details.contactType.embed }}
+                        />
+                    )}
                 </div>
             </section>
         </article>
