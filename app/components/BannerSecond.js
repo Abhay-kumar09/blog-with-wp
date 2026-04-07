@@ -1,8 +1,12 @@
 import React from 'react'
 
-const BannerSecond = ({ title, description }) => {
+const BannerSecond = ({ title, description, bgImage }) => {
+  const sectionStyle = bgImage ? { backgroundImage: `url(${bgImage})` } : {};
   return (
-    <section className='h-[50vh] bannersecond min-h-80  bg-[url("/home.jpg")] relative flex flex-wrap items-center'>
+    <section 
+      style={sectionStyle}
+      className={`h-[50vh] bannersecond min-h-80 ${bgImage ? 'bg-cover bg-center' : 'bg-[url("/home.jpg")]'} relative flex flex-wrap items-center`}
+    >
       <div className='absolute bg-slate-900 inset-0 z-0 opacity-40'></div>
       <div className='container'>
         <div>

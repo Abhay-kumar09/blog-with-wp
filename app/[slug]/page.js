@@ -1,6 +1,7 @@
 import React from 'react'
 import { getPageSlugs, getSinglePage } from "../../lib/pages";
 import BannerSecond from '../components/BannerSecond';
+import { getSections } from '../../lib/acf';
 
 export async function generateMetadata({ params }) {
     const { slug } = await params;
@@ -22,13 +23,22 @@ export async function generateStaticParams() {
 const page = async ({ params }) => {
     const { slug } = await params;
     const pageData = await getSinglePage(slug);
+    const acfData = await getSections(slug);
 
     if (!pageData) {
         return <div>page not found</div>;
     }
+
+    const blocks = acfData?.pageSections?.pageSections || [];
+    const bannerData = blocks.find(block => block.__typename === 'PageSectionsPageSectionsBannerSecondLayout');
+
+    const bannerTitle = bannerData?.title || pageData.title;
+    const bannerDescription = bannerData?.description || "";
+    const bgImage = bannerData?.backgroundImage?.node?.sourceUrl || null;
+
     return (
         <>
-            <BannerSecond title={pageData.title} description="" />
+            <BannerSecond title={bannerTitle} description={bannerDescription} bgImage={bgImage} />
             <section className="content-area mb-24">
                 <div className="container">
                     <div
