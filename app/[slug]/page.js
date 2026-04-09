@@ -1,6 +1,7 @@
 import React from 'react'
 import { getPageSlugs, getSinglePage } from "../../lib/pages";
 import BannerSecond from '../components/BannerSecond';
+import Intro from '../components/Intro';
 import { getSections } from '../../lib/acf';
 
 export async function generateMetadata({ params }) {
@@ -36,9 +37,16 @@ const page = async ({ params }) => {
     const bannerDescription = bannerData?.description || "";
     const bgImage = bannerData?.backgroundImage?.node?.sourceUrl || null;
 
+    const introBlock = blocks.find(block => block.__typename === 'PageSectionsPageSectionsIntroLayout');
+    const introEyebrow = introBlock?.eyebrow || null;
+    const introTitle = introBlock?.title || null;
+
     return (
         <>
             <BannerSecond title={bannerTitle} description={bannerDescription} bgImage={bgImage} />
+            { (introEyebrow || introTitle) && (
+                <Intro eyebrow={introEyebrow} title={introTitle} />
+            ) }
             <section className="content-area mb-24">
                 <div className="container">
                     <div
