@@ -2,7 +2,6 @@ import React from 'react'
 import Head from 'next/head'
 import BannerSecond from '../components/BannerSecond'
 import ContactForm from './ContactForm'
-import Intro from '../components/Intro'
 
 export const metadata = {
   title: 'Contact Us - Cool Nomad',
@@ -13,7 +12,6 @@ const page = () => {
     <>
       <BannerSecond title={"Contact Us"} />
       <ContactForm />
-      <Intro />
     </>
   )
 }

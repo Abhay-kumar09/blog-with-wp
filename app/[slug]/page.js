@@ -2,6 +2,7 @@ import React from 'react'
 import { getPageSlugs, getSinglePage } from "../../lib/pages";
 import BannerSecond from '../components/BannerSecond';
 import Intro from '../components/Intro';
+import Cards from '../components/Cards';
 import { getSections } from '../../lib/acf';
 
 export async function generateMetadata({ params }) {
@@ -41,11 +42,21 @@ const page = async ({ params }) => {
     const introEyebrow = introBlock?.eyebrow || null;
     const introTitle = introBlock?.title || null;
 
+    const threecardsBlock = blocks.find(block => block.__typename === 'PageSectionsPageSectionsThreecardsLayout');
+    const cardsData = threecardsBlock?.cards?.map(c => ({
+        img: c.icon?.node?.sourceUrl || '',
+        heading: c.title || '',
+        paragraph: c.description || ''
+    })) || null;
+
     return (
         <>
             <BannerSecond title={bannerTitle} description={bannerDescription} bgImage={bgImage} />
             { (introEyebrow || introTitle) && (
                 <Intro eyebrow={introEyebrow} title={introTitle} />
+            ) }
+            { cardsData && cardsData.length > 0 && (
+                <Cards data={cardsData} />
             ) }
             <section className="content-area mb-24">
                 <div className="container">
